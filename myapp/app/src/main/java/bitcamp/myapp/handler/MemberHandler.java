@@ -37,7 +37,7 @@ public class MemberHandler {
 
   public static void printMembers() {
     System.out.println("---------------------------------------");
-    System.out.println("번호, 이름, 핸드폰 번호, 성별, 방문이력");
+    System.out.println("이름, 핸드폰 번호, 성별, 방문이력");
     System.out.println("---------------------------------------");
 
     for (int i = 0; i < length; i++) {
