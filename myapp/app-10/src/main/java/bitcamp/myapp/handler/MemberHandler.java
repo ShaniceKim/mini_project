@@ -23,6 +23,7 @@ public class MemberHandler {
     }
 
     name[length] = Prompt.inputString("이름? ");
+    System.out.println(name[length]);
     email[length] = Prompt.inputString("이메일? ");
     password[length] = Prompt.inputString("암호? ");
     gender[length] = inputGender((char)0);
@@ -103,54 +104,38 @@ public class MemberHandler {
 
   public static void deleteMember() {
     int memberNo = Prompt.inputInt("번호? ");
+
     int deletedIndex = indexOf(memberNo);
-
-    // 삭제하려는 회원의 정보가 들어있는 인덱스를 알아낸다.
-    for (int i = 0; i < length; i++) {
-        if (no[i] == Integer.parseInt(memberNo)) {
-            deletedIndex = i;
-            break;
-        }
+    if (deletedIndex == -1) {
+      System.out.println("해당 번호의 회원이 없습니다!");
+      return;
     }
 
-    if (deletedIndex == -1) { // // 회원 정보가 없는 경우 오류 메시지를 출력한다.
-        System.out.println("해당 번호의 회원이 없습니다!");
-        return;
+    for (int i = deletedIndex; i < length - 1; i++) {
+      no[i] = no[i + 1];
+      name[i] = name[i + 1];
+      email[i] = email[i + 1];
+      password[i] = password[i + 1];
+      gender[i] = gender[i + 1];
     }
 
-    if (deletedIndex == length - 1) {
-          // 삭제하려는 항목이 맨 끝 항목이라면 마지막 항목의 값만 0으로 초기화 시킴
-        no[deletedIndex] = 0;
-        name[deletedIndex] = null;
-        email[deletedIndex] = null;
-        password[deletedIndex] = null;
-        gender[deletedIndex] = (char)0;
-    } else { // 그 밖에는 해당 인덱스부터 반복하면서 앞 인덱스의 값을 당겨옴
-        for (int i = deletedIndex; i < length - 1; i++) {
-            no[i] = no[i + 1];
-            name[i] = name[i + 1];
-            email[i] = email[i + 1];
-            password[i] = password[i + 1];
-            gender[i] = gender[i + 1];
-        }
-      }
-
-    // 마지막 인덱스의 값을 0으로 초기화
     no[length - 1] = 0;
     name[length - 1] = null;
     email[length - 1] = null;
     password[length - 1] = null;
-    gender[length - 1] = (char)0;
+    gender[length - 1] = (char) 0;
 
-    // length를 하나 줄인다
     length--;
   }
 
-  private static int indexOf(int no){
-
+  private static int indexOf(int memberNo) {
+    for (int i = 0; i < length; i++) {
+      if (no[i] == memberNo) {
+        return i;
+      }
+    }
+    return -1;
   }
-
-
 
   private static boolean available() {
     return length < MAX_SIZE;
