@@ -19,9 +19,10 @@ public class MemberHandler {
 
     Member m = new Member();
     m.setName(Prompt.inputString("이름? "));
-    m.setEmail(Prompt.inputString("이메일? "));
+    m.setPhoneNo(Prompt.inputString("핸드폰 번호? "));
     m.setPassword(Prompt.inputString("암호? "));
     m.setGender(inputGender((char) 0));
+    m.setHistory(inputHistory((char) 0));
 
     // 위에서 만든 Member 인스턴스의 주소를 잃어버리지 않게
     // 레퍼런스 배열에 담는다.
@@ -30,50 +31,64 @@ public class MemberHandler {
 
   public static void printMembers() {
     System.out.println("---------------------------------------");
-    System.out.println("번호, 이름, 이메일, 성별");
+    System.out.println("이름, 핸드폰 번호, 성별, 방문이력");
     System.out.println("---------------------------------------");
-
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      System.out.printf("%d, %s, %s, %s\n", m.getNo(), m.getName(), m.getEmail(),
-          toGenderString(m.getGender()));
+      System.out.printf("%s, %s, %s, %s\n", 
+      m.getName(), m.getPhoneNo(), 
+      toGenderString(m.getGender()),
+      toHistoryString(m.getHistory()));
+
     }
   }
 
-  public static void viewMember() {
-    String memberNo = Prompt.inputString("번호? ");
+    public static void viewMember() {
+    String memberName = Prompt.inputString("이름? ");
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.getNo() == Integer.parseInt(memberNo)) {
+      if (m.getName().equals(memberName)) {
         System.out.printf("이름: %s\n", m.getName());
-        System.out.printf("이메일: %s\n", m.getEmail());
+        System.out.printf("핸드폰 번호: %s\n", m.getPhoneNo());
         System.out.printf("성별: %s\n", toGenderString(m.getGender()));
+        System.out.printf("방문이력: %s\n", toHistoryString(m.getHistory()));
         return;
       }
     }
-    System.out.println("해당 번호의 회원이 없습니다!");
+    System.out.println("해당 이름의 회원이 없습니다!");
   }
 
   public static String toGenderString(char gender) {
     return gender == 'M' ? "남성" : "여성";
   }
 
+    private static String toHistoryString(char history) {
+    if (history == EXIST) {
+      return "있다(재 방문)";
+    } else if (history == NON_EXIST) {
+      return "없다(첫 방문)";
+    } else {
+      return "알 수 없다!";
+    }
+  }
+
   public static void updateMember() {
-    String memberNo = Prompt.inputString("번호? ");
+    String memberName = Prompt.inputString("이름? ");
     for (int i = 0; i < length; i++) {
       Member m = members[i];
-      if (m.getNo() == Integer.parseInt(memberNo)) {
+      if (m.getName().equals(memberName)) {
         System.out.printf("이름(%s)? ", m.getName());
         m.setName(Prompt.inputString(""));
-        System.out.printf("이메일(%s)? ", m.getEmail());
-        m.setEmail(Prompt.inputString(""));
-        System.out.printf("새암호? ");
+        System.out.printf("핸드폰 번호(%s)? ", m.getPhoneNo());
+        m.setPhoneNo(Prompt.inputString(""));
+        System.out.printf("새 암호? ");
         m.setPassword(Prompt.inputString(""));
         m.setGender(inputGender(m.getGender()));
+        m.setHistory(inputHistory(m.getHistory()));
         return;
       }
     }
-    System.out.println("해당 번호의 회원이 없습니다!");
+    System.out.println("해당 이름의 회원이 없습니다!");
   }
 
   private static char inputGender(char gender) {
@@ -98,6 +113,32 @@ public class MemberHandler {
     }
   }
 
+
+  private static char inputHistory(char history) {
+    String label;
+    if (history == 0) {
+      label = "방문 이력?\n";
+    } else {
+      label = String.format("방문 이력(%s)?\n", toHistoryString(history));
+    }
+    while (true) {
+      String menuNo1 = Prompt.inputString(label + 
+        "  1. 있다(재 방문)\n" + 
+        "  2. 없다(첫 방문)\n" + 
+        "> ");
+  
+      switch (menuNo1) {
+        case "1":
+          return EXIST;
+        case "2":
+          return NON_EXIST;
+        default:
+          System.out.println("무효한 번호입니다.");
+      }
+    }
+  }
+
+  
   public static void deleteMember() {
     int memberNo = Prompt.inputInt("번호? ");
 
