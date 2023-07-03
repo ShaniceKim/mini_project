@@ -17,7 +17,7 @@ public class Prompt {
     this.scanner = new Scanner(in);
   }
 
-  public String inputString(String title, Object... args) {
+  public String inputString(String title, Object... args) { // title에 넣을 object args도 선언
     System.out.printf(title, args);
     return this.scanner.nextLine();
   }
