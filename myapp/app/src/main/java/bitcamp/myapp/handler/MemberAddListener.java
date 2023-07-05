@@ -17,7 +17,7 @@ public class MemberAddListener extends AbstractMemberListener {
     m.setPhoneNo(prompt.inputString("핸드폰 번호? "));
     m.setPassword(prompt.inputString("암호? "));
     m.setGender(inputGender((char) 0, prompt));
-    m.setHistory(inputHistory((char) 0, prompt)); // 수정된 부분
+    m.setHistory(inputHistory((char) 0, prompt));
 
     this.list.add(m);
   }
