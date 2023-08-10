@@ -25,7 +25,7 @@ java {
 }
 
 application {
-    mainClass = 'bitcamp.myapp.ServerApp'
+    mainClass = 'mini_project.myapp.ServerApp'
 }
 
 tasks.named('test') {
@@ -48,7 +48,7 @@ tasks.withType(JavaCompile) {
 // eclipse 프로젝트 이름을 설정하기
 eclipse {
     project {
-        name = "myapp-server"
+        name = "pj-server"
     }
     jdt {
       sourceCompatibility = 17
