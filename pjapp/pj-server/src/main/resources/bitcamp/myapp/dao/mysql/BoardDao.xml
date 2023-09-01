@@ -51,7 +51,7 @@
     where
     category=#{categoryNo}
     order by
-    board_no desc
+    board_no asc
   </select>
 
   <select id="findBy" parameterType="map" resultMap="boardMap">
