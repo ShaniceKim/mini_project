@@ -43,11 +43,11 @@
     <button class="navbar-toggler hidden-lg-up collapsed" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation"> ☰ </button>
     <div class="navbar-toggleable-md collapse" id="exCollapsingNavbar2" >
       <ul class="nav navbar-nav pull-xs-right">
-        <li class="nav-item"> <a class="nav-link" href='/app/member/add'>회원가입</a></li>
+        <li class="nav-item"> <a class="nav-link" href='/admin/member/form'>회원가입</a></li>
 
         <jsp:useBean id="loginUser" class="bitcamp.myapp.vo.Member" scope="session"/>
         <% if (loginUser.getNo() == 0) { %>
-             <li class="nav-item"> <a class="nav-link" href='/app/auth/login'>로그인</a></li>
+             <li class="nav-item"> <a class="nav-link" href='/app/auth/form'>로그인</a></li>
         <% } else {
              if (loginUser.getPhoto() == null) { %>
                <img style='height:40px' src='/images/avatar.png'>
@@ -57,7 +57,7 @@
                ${loginUser.name} <a href='/app/auth/logout'>로그아웃</a>
         <% } %>
 
-        <li class="nav-item"> <a class="nav-link" href='/app/member/list'>회원</a></li>
+        <li class="nav-item"> <a class="nav-link" href='/admin/member/list'>회원</a></li>
         <li class="nav-item"> <a class="nav-link" href='/app/board/list?category=1'>후기</a></li>
         <li class="nav-item"> <a class="nav-link" href='/app/reserve/add'>예약</a></li>
         <li class="nav-item"> <a class="nav-link" href='/board/list?category=2'>Contact Us</a> </li>

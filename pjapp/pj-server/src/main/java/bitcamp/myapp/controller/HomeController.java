@@ -1,14 +1,16 @@
 package bitcamp.myapp.controller;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+@Controller
+public class HomeController {
+  {
+    System.out.println("HomeController 생성됨!");
+  }
 
-@Component("/")
-public class HomeController implements PageController {
-  @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @GetMapping("/")
+  public String home() throws Exception {
     return "/WEB-INF/jsp/index.jsp";
   }
 }

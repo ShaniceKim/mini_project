@@ -13,7 +13,7 @@ public class AttachedFile implements Serializable {
   @Override
   public String toString() {
     return "AttachedFile [no=" + no + ", originName=" + originName + ", filePath=" + filePath
-        + ", boardNo=" + boardNo + "]";
+            + ", boardNo=" + boardNo + "]";
   }
   public int getNo() {
     return no;
